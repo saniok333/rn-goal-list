@@ -22,7 +22,19 @@ const App = () => {
     ]);
   };
 
-  const renderItem = ({ item }) => <GoalItem text={item.text} />;
+  const onDeleteGoalHandler = (id) => {
+    setGoalList((currentGoalList) =>
+      currentGoalList.filter((goal) => goal.id !== id)
+    );
+  };
+
+  const renderItem = ({ item }) => (
+    <GoalItem
+      text={item.text}
+      id={item.id}
+      onDeleteGoal={onDeleteGoalHandler}
+    />
+  );
 
   return (
     <View style={styles.appContainer}>
