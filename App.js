@@ -8,6 +8,8 @@ import {
   FlatList,
 } from 'react-native';
 
+import { GoalItem } from './components/GoalItem';
+
 const App = () => {
   const [newGoal, setNewGoal] = useState('');
   const [goalList, setGoalList] = useState([]);
@@ -23,13 +25,7 @@ const App = () => {
     ]);
   };
 
-  const renderItem = ({ item }) => {
-    return (
-      <View style={styles.goalItem}>
-        <Text style={styles.goalItemText}>{item.text}</Text>
-      </View>
-    );
-  };
+  const renderItem = ({ item }) => <GoalItem text={item.text} />;
 
   return (
     <View style={styles.appContainer}>
@@ -46,7 +42,7 @@ const App = () => {
           data={goalList}
           alwaysBounceVertical={false}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item, index) => item.id}
         />
       </View>
     </View>
@@ -79,14 +75,5 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 5,
-  },
-  goalItem: {
-    margin: 8,
-    padding: 8,
-    borderRadius: 6,
-    backgroundColor: '#5e0acc',
-  },
-  goalItemText: {
-    color: 'white',
   },
 });
