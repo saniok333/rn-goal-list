@@ -10,15 +10,12 @@ import {
 
 import { GoalItem } from './components/GoalItem';
 
+import { GoalInput } from './components/GoalInput';
+
 const App = () => {
-  const [newGoal, setNewGoal] = useState('');
   const [goalList, setGoalList] = useState([]);
 
-  const goalInputHandler = (enteredText) => {
-    setNewGoal(enteredText);
-  };
-
-  const addGoalHandler = () => {
+  const onAddGoalHandler = (newGoal) => {
     setGoalList((currentGoalList) => [
       ...currentGoalList,
       { text: newGoal, id: Math.random().toString() },
@@ -29,14 +26,7 @@ const App = () => {
 
   return (
     <View style={styles.appContainer}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Your goal"
-          onChangeText={goalInputHandler}
-        />
-        <Button title="Add Goal" onPress={addGoalHandler} />
-      </View>
+      <GoalInput onAddGoal={onAddGoalHandler} />
       <View style={styles.goalsContainer}>
         <FlatList
           data={goalList}
@@ -57,22 +47,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     flex: 1,
   },
-  inputContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 24,
-    borderBottomWidth: 1,
-    borderBottomColor: '#cccccc',
-  },
-  textInput: {
-    borderWidth: 1,
-    borderColor: '#cccccc',
-    width: '70%',
-    marginRight: 8,
-    padding: 8,
-  },
+
   goalsContainer: {
     flex: 5,
   },
